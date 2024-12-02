@@ -1,0 +1,87 @@
+<div class="container">
+    <app-sidebar
+      [isIdentificationActive]="false"
+      [isRiskAssessmentActive]="true"
+      [isVisualizationActive]="false">
+    </app-sidebar>
+  
+    <div class="content">
+      <h1>IPERC/Valoración del riesgo por tarea</h1>
+  
+      <!-- 1. Actividades y tareas -->
+      <section class="section">
+        <h2>1. Actividades y tareas</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ITEM.</th>
+              <th>ACTIVIDAD</th>
+              <th>TAREA</th>
+              <th>PUESTO DE TRABAJO</th>
+              <th>CONDICIÓN OPERACIONAL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><input type="text" placeholder="Actividad"></td>
+              <td><input type="text" placeholder="Tarea"></td>
+              <td><input type="text" placeholder="Puesto"></td>
+              <td><input type="text" placeholder="Condición"></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+  
+      <!-- 2. Análisis e identificación del riesgo -->
+      <section class="section">
+        <h2>2. Análisis e identificación del riesgo</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>DESCRIPCIÓN PELIGRO</th>
+              <th>EVENTO NO DESEADO</th>
+              <th>AFECTADO</th>
+              <th>TIPO DE CONTACTO</th>
+              <th>CONSECUENCIA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" placeholder="Descripción"></td>
+              <td><input type="text" placeholder="Evento"></td>
+              <td><input type="text" placeholder="Afectado"></td>
+              <td><input type="text" placeholder="Tipo"></td>
+              <td><input type="text" placeholder="Consecuencia"></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+  
+      <!-- 3. Valoración del riesgo inicial -->
+      <section class="section">
+        <h2>3. Valoración del riesgo inicial</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>PROBABILIDAD</th>
+              <th>SEVERIDAD</th>
+              <th>RIESGO INICIAL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="number" placeholder="Probabilidad"></td>
+              <td><input type="number" placeholder="Severidad"></td>
+              <td><input type="number" placeholder="Riesgo"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="buttons">
+          <button class="btn culminar">Culminar</button>
+          <button class="btn añadir-mas">Añadir más</button>
+        </div>
+      </section>
+    </div>
+  </div>
+  

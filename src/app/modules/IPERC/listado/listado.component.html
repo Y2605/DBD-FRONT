@@ -1,0 +1,23 @@
+<div class="container">
+    <h1>IPERC / Llenado de Datos de IPERC</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>PROCESO</th>
+          <th>ULTM. FECHA ACTUALIZACIÓN</th>
+          <th>ACCIONES</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let elemento of listadoIPERC">
+          <td>{{ elemento.proceso }}</td>
+          <td>{{ elemento.ult_fecha_act }}</td>
+          <td>
+            <button class="edit-btn">Editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button (click)="ngOnInit()" class="edit-btn">Editar</button>
+  

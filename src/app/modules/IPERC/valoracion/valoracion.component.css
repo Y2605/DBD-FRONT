@@ -1,0 +1,82 @@
+.container {
+    display: flex;
+    font-family: Arial, sans-serif;
+  }
+  
+  app-sidebar {
+    width: 20%;
+    background-color: #f0f0f0;
+  }
+  
+  .content {
+    width: 80%;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 24px;
+    color: #4a4a4a;
+    margin-bottom: 20px;
+  }
+  
+  .section {
+    margin-bottom: 40px;
+  }
+  
+  .section h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  .table input {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .culminar {
+    background-color: #0066cc;
+    color: #fff;
+  }
+  
+  .añadir-mas {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .btn:hover {
+    opacity: 0.9;
+  }
+  

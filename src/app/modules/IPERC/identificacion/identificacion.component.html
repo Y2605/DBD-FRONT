@@ -1,0 +1,100 @@
+<div class="flex h-screen">
+  <!-- Sidebar -->
+  <app-sidebar
+    class="sidebar"
+    [isIdentificationActive]="true"
+    [isRiskAssessmentActive]="false"
+    [isVisualizationActive]="false"
+  ></app-sidebar>
+
+  <!-- Contenido principal -->
+  <div class="main-content">
+    <div class="content-box">
+      <h2 class="title">IPERC/Llenado de datos</h2>
+
+      <!-- Identificación del equipo evaluador -->
+      <section class="mb-6">
+        <h3 class="section-title">1. Identificación del equipo evaluador</h3>
+        <div class="flex-column">
+          <div
+            *ngFor="let empleado of equipoEvaluador; let i = index"
+            class="flex-row"
+          >
+            <label for="empleado-{{ i }}" class="label">
+              Empleado {{ i + 1 }}:
+            </label>
+            <select
+              id="empleado-{{ i }}"
+              class="select"
+              [ngModel]="equipoEvaluador[i]"
+              (change)="seleccionarEmpleado($event, i)"
+            >
+              <option value="">-----</option>
+              <option *ngFor="let opcion of listaEmpleados" [value]="opcion">
+                {{ opcion }}
+              </option>
+            </select>
+            <button
+              type="button"
+              class="delete-button"
+              (click)="eliminarEmpleado(i)"
+            >
+              🗑️
+            </button>
+          </div>
+        </div>
+        <button
+          class="button mt-4"
+          (click)="agregarEmpleado()"
+          [disabled]="equipoEvaluador.length >= listaEmpleados.length"
+        >
+          Añadir otra casilla más
+        </button>
+      </section>
+
+      <!-- Identificación del proceso -->
+      <section class="mb-6">
+        <h3 class="section-title">2. Identificación del proceso</h3>
+        <label for="proceso" class="label">Proceso:</label>
+        <input
+          id="proceso"
+          type="text"
+          placeholder="Escribe el proceso"
+          [(ngModel)]="proceso"
+          class="input"
+        />
+      </section>
+
+      <!-- Área, fecha y unidad minera -->
+      <section class="mb-6">
+        <h3 class="section-title">3. Área, fecha y Unidad Minera</h3>
+        <label for="unidad-minera" class="label">Unidad minera:</label>
+        <input
+          id="unidad-minera"
+          type="text"
+          placeholder="Unidad minera"
+          [(ngModel)]="unidadMinera"
+          class="input"
+        />
+
+        <label for="fecha" class="label">Fecha:</label>
+        <input
+          id="fecha"
+          type="date"
+          [(ngModel)]="fecha"
+          class="input"
+        />
+
+        <label for="area" class="label">Área:</label>
+        <input
+          id="area"
+          type="text"
+          placeholder="Área"
+          [(ngModel)]="area"
+          class="input"
+        />
+      </section>
+
+      <!-- Botón para enviar el formulario -->
+      <button class="button bg-green-500 hover:bg-green-700" (click)="submitForm()">Siguiente</button>
+ 

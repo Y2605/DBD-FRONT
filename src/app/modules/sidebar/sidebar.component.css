@@ -1,0 +1,66 @@
+/* Estilo general del contenedor */
+.menu-container {
+  width: 250px;
+  background-color: #6e47e7;
+  color: white;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  height: 100vh; /* Ocupa toda la pantalla */
+  display: flex;
+  flex-direction: column; /* Distribuye los elementos en columna */
+  align-items: center; /* Centra horizontalmente los elementos */
+  justify-content: space-between; /* Espaciado entre los elementos */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sombra lateral */
+}
+
+/* Logo */
+.logo {
+  margin-bottom: 20px;
+}
+
+.logo img {
+  max-width: 100%; /* Se asegura de que no se salga del contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+}
+
+/* Estilo del menú */
+nav {
+  width: 100%;
+}
+
+.menu-section {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.menu-section h3 {
+  font-size: 18px;
+  color: white;
+  margin-bottom: 10px;
+  cursor: pointer; /* Indica que es interactivo */
+  transition: color 0.3s; /* Transición para el hover */
+}
+
+.menu-section h3.active {
+  color: yellow; /* Color de la sección activa */
+  font-weight: bold; /* Resalta la sección activa */
+}
+
+.menu-section h3:hover {
+  color: #ffdf00; /* Color al pasar el mouse */
+}
+
+/* Botón de regresar */
+.return-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.return-button:hover {
+  background-color: #218838; /* Color más oscuro al pasar el mouse */
+}

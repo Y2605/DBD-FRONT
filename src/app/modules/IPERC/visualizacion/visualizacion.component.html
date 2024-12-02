@@ -1,0 +1,75 @@
+<div class="layout">
+    <app-sidebar
+      [isIdentificationActive]="false"
+      [isRiskAssessmentActive]="true"
+      [isVisualizationActive]="false">
+    </app-sidebar>
+  
+    <div class="tabla-container">
+      <h4>4. Visualización</h4>
+      <div class="encabezado"></div>
+  
+      <table class="tabla-riesgo">
+        <thead>
+          <tr>
+            <th>ITEM.</th>
+            <th>ACTIVIDAD</th>
+            <th>TAREA</th>
+            <th>PUESTO DE TRABAJO</th>
+            <th>CONDICIÓN OPERACIONAL</th>
+            <th colspan="2">IDENTIFICACIÓN DEL RIESGO</th>
+            <th colspan="4">ANÁLISIS DEL RIESGO</th>
+            <th>RIESGO INICIAL</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>DESCRIPCIÓN PELIGRO</th>
+            <th>EVENTO NO DESEADO</th>
+            <th>AFECTADO</th>
+            <th>TIPO DE CONTACTO</th>
+            <th>CONSECUENCIA</th>
+            <th>PROBABILIDAD</th>
+            <th>SEVERIDAD</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>251</td>
+            <td>6. Mantenimiento Preventivo de Piques</td>
+            <td>6.7. Lubricación, cambio de componentes, feeder</td>
+            <td>Supervisor de Manto. Técnico Mecánico Técnico Electricista Técnico Soldador</td>
+            <td>Tareas Rutinarias</td>
+            <td>Herramientas hechizas</td>
+            <td>Mala manipulación</td>
+            <td>Personas</td>
+            <td>TC 02 GOLPEADO POR Herramientas</td>
+            <td>Heridas cortantes, contusas, golpes, traumatismos</td>
+            <td>Podría Suceder</td>
+            <td>Temporal</td>
+            <td class="riesgo-bajo">Bajo</td>
+          </tr>
+          <tr>
+            <td>252</td>
+            <td>6. Mantenimiento Preventivo de Piques</td>
+            <td>6.7. Lubricación, cambio de componentes, feeder</td>
+            <td>Supervisor de Manto. Técnico Mecánico Técnico Electricista Técnico Soldador</td>
+            <td>Tareas Rutinarias</td>
+            <td>Derrame Potencial de hidrocarburos</td>
+            <td>Alteración de la calidad del suelo y/o agua</td>
+            <td>Proceso</td>
+            <td>TC 03 MATERIALES QUÍMICOS Hidrocarburos</td>
+            <td>Alteración de la calidad del suelo y/o agua</td>
+            <td>Ha Sucedido</td>
+            <td>Temporal</td>
+            <td class="riesgo-medio">Medio</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

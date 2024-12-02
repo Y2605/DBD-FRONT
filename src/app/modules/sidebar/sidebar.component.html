@@ -1,0 +1,43 @@
+<div class="menu-container">
+  <!-- Logo -->
+  <div class="logo">
+    <img src="assets/images/buenaventura.png" alt="Logo de Buenaventura" />
+  </div>
+
+  <!-- Menú -->
+  <nav>
+    <div class="menu-section">
+      <h3
+        [class.active]="isIdentificationActive"
+        tabindex="0"
+        aria-label="Identificación"
+        
+      >
+        Identificación
+      </h3>
+    </div>
+    <div class="menu-section">
+      <h3
+        [class.active]="isRiskAssessmentActive"
+        tabindex="0"
+        aria-label="Valoración del riesgo por tarea"
+        
+      >
+        Valoración del riesgo por tarea
+      </h3>
+    </div>
+    <div class="menu-section">
+      <h3
+        [class.active]="isVisualizationActive"
+        tabindex="0"
+        aria-label="Visualización"
+        
+      >
+        Visualización
+      </h3>
+    </div>
+  </nav>
+
+  <!-- Botón de regresar -->
+  <button class="return-button" (click)="goToModules()">Regresar a MÓDULOS</button>
+</div>

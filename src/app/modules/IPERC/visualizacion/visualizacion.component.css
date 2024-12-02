@@ -1,0 +1,52 @@
+.layout {
+    display: flex;
+  }
+  
+  app-sidebar {
+    flex: 0 0 250px; /* Ancho del sidebar */
+    background-color: #f3f4f6;
+    height: 100vh; /* Altura completa */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tabla-container {
+    flex: 1;
+    margin: 2rem;
+    overflow-x: auto;
+  }
+  
+  h4 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .tabla-riesgo {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 0.875rem;
+  }
+  
+  .tabla-riesgo th {
+    background-color: #f3f4f6;
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+  }
+  
+  .tabla-riesgo td {
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+  }
+  
+  .riesgo-bajo {
+    background-color: #22c55e;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .riesgo-medio {
+    background-color: #facc15;
+    color: black;
+    font-weight: bold;
+  }
+  
