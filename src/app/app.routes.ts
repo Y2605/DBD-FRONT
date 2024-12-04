@@ -10,11 +10,23 @@ export const routes: Routes = [
         component: IdentificacionComponent,
     },
     {
+        path: 'identificacion/:id_proceso',
+        component: IdentificacionComponent,
+    },
+    {
         path: 'valoracion', // Ruta para el componente Identificacion
         component: ValoracionComponent,
     },
     {
+        path: 'visualizacion/:id_proceso',
+        component: ValoracionComponent,
+    },
+    {
         path: 'visualizacion', // Ruta para el componente Identificacion
+        component: VisualizacionComponent,
+    },
+    {
+        path:'visualizacion/:id_proceso',
         component: VisualizacionComponent,
     },
     {

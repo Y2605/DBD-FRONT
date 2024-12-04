@@ -6,3 +6,15 @@ export interface ListadoIPERC {
     // Otros campos que tenga tu modelo ListadoIPERC
   }
   
+  export interface Empleado {
+    id_empleado: number;
+    nombre: string;
+  }
+
+  export interface Informe {
+    equipoEvaluador: Empleado[];
+    proceso: string;
+    unidadMinera: string;
+    fechaRegistro: string;
+    area: string;
+  }

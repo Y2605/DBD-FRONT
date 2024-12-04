@@ -30,8 +30,8 @@
               (change)="seleccionarEmpleado($event, i)"
             >
               <option value="">-----</option>
-              <option *ngFor="let opcion of listaEmpleados" [value]="opcion">
-                {{ opcion }}
+              <option *ngFor="let empleado of listaEmpleados" [value]="empleado.id_empleado">
+                {{ empleado.nombre }}
               </option>
             </select>
             <button

@@ -1,76 +1,110 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // Importar FormsModule
-import { NgModule } from '@angular/core'; // Importar NgModule
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from "../../sidebar/sidebar.component";
+import { BuenaVenturaService } from '../../../../services/services';
+import { ActivatedRoute } from '@angular/router';
+import { Empleado, Informe } from '../../../models/models';
+import { DatePipe } from '@angular/common'; // Importar DatePipe para el formateo de fecha
 
 @Component({
   selector: 'app-identificacion',
   standalone: true,
-  imports: [FormsModule, CommonModule, SidebarComponent], // Declarar FormsModule y CommonModule aquí
+  imports: [FormsModule, CommonModule, SidebarComponent],
   templateUrl: './identificacion.component.html',
   styleUrls: ['./identificacion.component.css'],
+  providers: [DatePipe]  // Añadir DatePipe como proveedor
 })
-export class IdentificacionComponent {
-  empDataBoxesQuant: number = 0; // Cantidad actual de casillas para empleados
+export class IdentificacionComponent implements OnInit {
+  id_proceso: number | null = null;
+  empDataBoxesQuant: number = 0; // Cantidad de casillas de empleados
   cantEmpleados: number = 4; // Cantidad máxima de empleados
-  listaEmpleados: string[] = ['Empleado 1', 'Empleado 2', 'Empleado 3', 'Empleado 4']; // Lista original de empleados
-  equipoEvaluador: string[] = []; // Lista del equipo evaluador
-  proceso: string = ''; // Proceso ingresado
-  unidadMinera: string = ''; // Unidad minera ingresada
-  fecha: string = ''; // Fecha ingresada
-  area: string = ''; // Área ingresada
+  listaEmpleados!: Empleado[];
+  equipoEvaluador: Empleado[] = [];
+  proceso: string = '';
+  unidadMinera: string = '';
+  fecha: string = ''; // Fechaen formato 'yyyy-mm-dd'
+  area: string = '';
 
-  /**
-   * Agregar una nueva casilla para seleccionar un empleado, si hay disponibles.
-   */
-  agregarEmpleado() {
-    if (this.listaEmpleados.length > this.equipoEvaluador.length) {
-      this.equipoEvaluador.push(''); // Agrega una nueva casilla vacía
-      this.empDataBoxesQuant++;
+  constructor(
+    private service: BuenaVenturaService,
+    private route: ActivatedRoute,
+    private datePipe: DatePipe // Inyectar DatePipe
+  ) {}
+
+  ngOnInit(): void {
+    const idProcesoStr = this.route.snapshot.paramMap.get('id_proceso');
+    this.id_proceso = idProcesoStr ? parseInt(idProcesoStr, 10) : null;  // Usamos parseInt para convertir a número
+    this.loadEmpleados();
+
+    if (this.id_proceso) {
+      this.service.getInforme(this.id_proceso).subscribe({
+        next: (data: Informe) => {
+          this.proceso = data.proceso;
+          this.area = data.area;
+          this.fecha = this.formatearFecha(data.fechaRegistro); // Formatear la fecha
+          this.unidadMinera = data.unidadMinera;
+          this.equipoEvaluador = data.equipoEvaluador;
+        },
+        error: (err) => {
+          console.error('Error al obtener informe:', err);
+        }
+      });
     }
-    console.log(this.equipoEvaluador);
   }
 
-  /**
-   * Actualiza la lista de empleados seleccionados.
-   * @param event - Evento del cambio en el select.
-   * @param index - Índice de la casilla actual en el equipo evaluador.
-   */
-  seleccionarEmpleado(event: Event, index: number) {
+  // Función para formatear la fecha recibida 'dd/mm/yyyy' a un objeto Date
+  formatearFecha(fecha: string): string {
+    const [day, month, year] = fecha.split('/'); // Dividimos la fecha en partes
+    return `${year}-${month}-${day}`; // Creamos un objeto Date con formato 'yyyy-mm-dd'
+  }
+
+  loadEmpleados(): void {
+    this.service.getEmpleados(null).subscribe({
+      next: (data: Empleado[]) => {
+        this.listaEmpleados = data; // Asignar directamente la lista de empleados
+      },
+      error: (err) => {
+        console.error('Error al obtener los empleados:', err);
+      }
+    });
+  }
+
+  agregarEmpleado(): void {
+    if (this.listaEmpleados.length > this.equipoEvaluador.length) {
+      // Agregar un nuevo objeto vacío para la nueva casilla
+      this.equipoEvaluador.push({ id_empleado: 0, nombre: '' });
+    }
+  }
+  
+  seleccionarEmpleado(event: Event, index: number): void {
     const selectElement = event.target as HTMLSelectElement;
     const empleadoSeleccionado = selectElement.value;
-
-    // Validación para evitar duplicados
-    if (!this.equipoEvaluador.includes(empleadoSeleccionado)) {
-      this.equipoEvaluador[index] = empleadoSeleccionado; // Actualiza el empleado seleccionado
+  
+    // Comprobar si ya el empleado está seleccionado
+    const empleadoExistente = this.equipoEvaluador.some(empleado => empleado.id_empleado === parseInt(empleadoSeleccionado,10));
+  
+    if (!empleadoExistente && empleadoSeleccionado !== '') {
+      // Buscar el empleado completo en la lista de empleados
+      const empleado = this.listaEmpleados.find(emp => emp.id_empleado === parseInt(empleadoSeleccionado,10));
+  
+      if (empleado) {
+        // Actualizar el equipoEvaluador con el empleado completo
+        this.equipoEvaluador[index] = empleado;
+      }
     } else {
-      alert('El empleado ya está seleccionado. Por favor, elige otro.');
-      selectElement.value = ''; // Reinicia el select si el valor ya existe
-    }
-    
-  }
-
-  /**
-   * Actualiza la lista de empleados disponibles para excluir los ya seleccionados.
-   */
-
-  /**
-   * Elimina un empleado del equipo evaluador y lo devuelve a la lista de disponibles.
-   * @param index - Índice del empleado en el equipo evaluador.
-   */
-  eliminarEmpleado(index: number) {
-    const empleadoEliminado = this.equipoEvaluador[index];
-    if (empleadoEliminado) {
-      this.equipoEvaluador.splice(index, 1); // Elimina al empleado de la lista
-      this.empDataBoxesQuant--;
+      alert('El empleado ya está seleccionado o no es válido. Por favor, elige otro.');
+      selectElement.value = ''; // Reiniciar el select si el valor ya existe
     }
   }
+  
+  eliminarEmpleado(index: number): void {
+    // Eliminar el empleado de la lista del equipo
+    this.equipoEvaluador.splice(index, 1);
+  }
+  
 
-  /**
-   * Envía el formulario con los datos ingresados y seleccionados.
-   */
-  submitForm() {
+  submitForm(): void {
     const formData = {
       equipoEvaluador: this.equipoEvaluador,
       proceso: this.proceso,
@@ -83,22 +117,17 @@ export class IdentificacionComponent {
 
   isEmpty(value: any): boolean {
     if (value === null || value === undefined) {
-      return true; // Nulo o indefinido se considera vacío
+      return true;
     }
-  
     if (typeof value === "string") {
-      return value.trim().length === 0; // Cadenas vacías o solo con espacios
+      return value.trim().length === 0;
     }
-  
     if (Array.isArray(value)) {
-      return value.length === 0; // Arrays vacíos
+      return value.length === 0;
     }
-  
     if (typeof value === "object") {
-      return Object.keys(value).length === 0; // Objetos sin propiedades
+      return Object.keys(value).length === 0;
     }
-  
-    return false; // Otros tipos no se consideran vacíos
+    return false;
   }
-  
 }

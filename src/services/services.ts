@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ListadoIPERC } from '../app/models/models';
+import { Empleado, ListadoIPERC,Informe } from '../app/models/models';
 
 // Importa el modelo ListadoIPERC (ajusta la ruta según corresponda)
 
@@ -15,11 +15,25 @@ export class BuenaVenturaService {
 
   constructor(private http: HttpClient) { }
 
-  /**
-   * Método para obtener el listado de IPERC.
-   * @returns Observable de ListadoIPERC[]
-   */
+  
   getListadoIPERC(): Observable<ListadoIPERC[]> {
     return this.http.get<ListadoIPERC[]>(this.apiUrl+'getListadoIPERC');
+  }
+
+  getEmpleados(idProceso: number|null): Observable<Empleado[]> {
+    let params = new HttpParams();
+    if (idProceso !== null) {
+      params = params.set('id_proceso', idProceso.toString());
+    }
+
+    return this.http.get<Empleado[]>(this.apiUrl+'getEmpleados', { params });
+  }
+
+  getInforme(idProceso:number):Observable<Informe>{
+    let params = new HttpParams();
+    if (idProceso !== undefined && idProceso !== null) {
+      params = params.set('id_proceso', idProceso.toString());
+    }
+    return this.http.get<Informe>(this.apiUrl+'getInforme',{params:params});
   }
 }
