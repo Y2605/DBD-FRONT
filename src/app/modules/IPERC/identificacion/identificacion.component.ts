@@ -45,6 +45,7 @@ export class IdentificacionComponent implements OnInit {
           this.fecha = this.formatearFecha(data.fechaRegistro); // Formatear la fecha
           this.unidadMinera = data.unidadMinera;
           this.equipoEvaluador = data.equipoEvaluador;
+          console.log(this.equipoEvaluador);
         },
         error: (err) => {
           console.error('Error al obtener informe:', err);
@@ -89,8 +90,10 @@ export class IdentificacionComponent implements OnInit {
       const empleado = this.listaEmpleados.find(emp => emp.id_empleado === parseInt(empleadoSeleccionado,10));
   
       if (empleado) {
+        console.log(empleado);
         // Actualizar el equipoEvaluador con el empleado completo
         this.equipoEvaluador[index] = empleado;
+
       }
     } else {
       alert('El empleado ya está seleccionado o no es válido. Por favor, elige otro.');

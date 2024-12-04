@@ -26,7 +26,7 @@
             <select
               id="empleado-{{ i }}"
               class="select"
-              [ngModel]="equipoEvaluador[i]"
+              [ngModel]="equipoEvaluador[i].id_empleado"
               (change)="seleccionarEmpleado($event, i)"
             >
               <option value="">-----</option>
